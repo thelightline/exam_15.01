@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Verify SMS</title>
+    <script src="verify_sms.js"></script>
+</head>
+
+<body>
+    <h1>Verify SMS Code</h1>
+
+    <form id="verificationForm" onsubmit="return verifyCode()">
+        <label for="verificationCode">Enter Verification Code:</label><br>
+        <input type="text" id="verificationCode" name="verificationCode" required><br><br>
+        <input type="submit" value="Verify">
+    </form>
+</body>
+
+</html>
+

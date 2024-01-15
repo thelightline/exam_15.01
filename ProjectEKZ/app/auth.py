@@ -55,16 +55,17 @@ def verify_sms(user_id):
         flash('User not found.', 'danger')
         return redirect(url_for('auth.login'))
 
+    entered_code = None
     if request.method == 'POST':
         entered_code = request.form.get('sms_code')
 
-        if check_password_hash(user.sms_code, entered_code):
-            # SMS-код верен, производим авторизацию пользователя
-            login_user(user)
-            flash('You have been successfully authenticated.', 'success')
-            return redirect(url_for('index'))
-        else:
-            flash('Invalid SMS code. Please try again.', 'danger')
+    if check_password_hash(user.password_hash, entered_code):
+            # Пароль верен, производим авторизацию пользователя
+        login_user(user)
+        flash('You have been successfully authenticated.', 'success')
+        return redirect(url_for('time'))  # Перенаправление на страницу 'time.html'
+    else:
+        flash('Invalid SMS code. Please try again.', 'danger')
 
     return render_template('verify_sms.html', user=user)
 
