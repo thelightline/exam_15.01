@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Приложение таксопарка</title>
+</head>
+<body>
+    <header>
+        <h1>Приложение таксопарка</h1>
+        <nav>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('free_cars') }}">free cars</a>
+                <a href="{{ url_for('arrival_time') }}">arrival_time</a>
+                <a href="{{ url_for('auth.logout') }}">Logout</a>
+            {% else %}
+                <!-- <a href="{# url_for('auth.login') #}">Login</a> -->
+                <a href="{{ url_for('free_cars') }}">free cars</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+		{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

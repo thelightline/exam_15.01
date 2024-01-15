@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Cars</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Free Cars</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Driver</th>
+                <th>Number</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in free_cars %}
+                <tr>
+                    <td>{{ car.model }}</td>
+                    <td>{{ car.driver }}</td>
+                    <td>{{ car.number }}</td>
+                    <td><a href="{{ url_for('arrival_time', car_id=car.id) }}">Assign</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('index') }}" class="button">Go to Main Page</a>
+</body>
+</html>
